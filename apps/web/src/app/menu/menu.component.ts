@@ -1,0 +1,114 @@
+import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
+import {MenuResource} from "../_resources/menu.resource";
+
+@Component({
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.scss']
+})
+export class MenuComponent implements OnInit {
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: any) {
+    if (this.isPageMenuScrollingTimeoutId) {
+      return;
+    }
+
+    // Detect the most visible group
+    const containerElement = this.element.nativeElement.querySelector('.menu-group-wrapper')
+    const groupElements = this.element.nativeElement.querySelectorAll('.menu-group')
+    const containerElementRect = containerElement.getBoundingClientRect()
+    let groupId = 0
+    let visibleHeight = 0;
+
+    for (let i = 0; i < groupElements.length; i++) {
+      const groupElement = groupElements[i];
+      const groupElementRect = groupElement.getBoundingClientRect();
+      let visibleTop;
+      let visibleBottom;
+
+      if (groupElementRect.top >= containerElementRect.top && groupElementRect.top < containerElementRect.bottom) {
+        visibleTop = groupElementRect.top;
+      }
+
+      if (groupElementRect.bottom >= containerElementRect.top && groupElementRect.top < containerElementRect.bottom) {
+        visibleBottom = groupElementRect.bottom;
+      }
+
+      if (visibleTop === undefined && visibleBottom !== undefined) {
+        visibleTop = containerElementRect.top;
+      }
+
+      if (visibleTop !== undefined && visibleBottom === undefined) {
+        visibleBottom = containerElementRect.bottom;
+      }
+
+      if (visibleTop !== undefined && visibleBottom !== undefined) {
+        const newVisibleHeight = visibleBottom - visibleTop;
+
+        if (newVisibleHeight > visibleHeight + 10) {
+          visibleHeight = newVisibleHeight;
+          groupId = parseInt(groupElement.id.slice(2));
+        }
+      }
+    }
+
+    if (groupId === this.targetGroupId) {
+      this.targetGroupId = null;
+    }
+
+    if (!this.targetGroupId) {
+      this.scrollToTopMenu(groupId);
+    }
+  }
+
+  menu: any = [];
+  groupId = 0;
+  targetGroupId: any = null;
+  totalPrice = 0;
+  isPageMenuScrollingTimeoutId = 0;
+
+  constructor(private element: ElementRef, private menuResource: MenuResource) {
+  }
+
+  ngOnInit(): void {
+    this.menuResource.getMenu().then((menu: any) => {
+      this.menu = menu;
+      this.groupId = this.menu[0].id;
+    })
+  }
+
+  scrollToTopMenu(groupId: number) {
+    this.groupId = groupId;
+    this.element.nativeElement.querySelector('#a-' + groupId).scrollIntoView({ block: "start", behavior: "auto"})
+  }
+
+  scrollToPageMenu(groupId: number) {
+    this.isPageMenuScrollingTimeoutId = setTimeout(() => {
+      this.isPageMenuScrollingTimeoutId = 0;
+    }, 1000)
+    this.groupId = this.targetGroupId = groupId;
+    this.element.nativeElement.querySelector('#b-' + groupId).scrollIntoView({block: "start", behavior: "smooth"})
+  }
+
+  addToCart(item: any) {
+    item.amount++;
+    this.updateTotal();
+  }
+
+  removeFromCart(item: any) {
+    if (item.amount) {
+      item.amount--;
+    }
+    this.updateTotal();
+  }
+
+  updateTotal() {
+    this.totalPrice = 0;
+    this.menu.forEach((group: any) => {
+      group.items.forEach((item: any) => {
+        this.totalPrice += item.amount * item.price;
+      })
+    })
+  }
+}
