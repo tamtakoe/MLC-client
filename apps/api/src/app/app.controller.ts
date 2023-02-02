@@ -14,22 +14,26 @@ export class AppController {
     // return this.appService.getMenu();
 
     const axiosConfig: AxiosRequestConfig = {
-      url: 'http://188.225.14.40:8067/api/v1/mlc/1/',
+      url: 'http://188.225.14.40:8067/api/v1/mlc/info/1',
       method: 'GET',
       responseType: 'json',
-      headers: {
-        UserId: 1
-      },
+      // headers: {
+      //   UserId: 1
+      // },
     }
 
     // @ts-ignore
     return httpService.request(axiosConfig).toPromise().then((data: any) => {
-      return data;
+      // console.log(data)
+      return data.data;
 
     }).catch(error => {
-      console.log(error);
+      // console.log(error);
+      // console.log(error.response.data);
 
-      return Promise.reject(error);
+      return error.response.data.error;
+
+      // return Promise.reject(error);
     });
   }
 }

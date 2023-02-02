@@ -1,7 +1,7 @@
 export default {
   production: true,
 
-  port: 80, // Exposes HTTP_PORT (80) in the DM Docker Mappings
+  port: 8080, // Exposes HTTP_PORT (8080) in the DM Docker Mappings
   hostName: '0.0.0.0',
 
   cors: {

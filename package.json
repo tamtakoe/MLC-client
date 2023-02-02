@@ -8,7 +8,10 @@
     "start": "nx serve",
     "start:web": "nx serve web --port 4100",
     "start:api": "nx serve api --watch",
-    "build": "nx build",
+    "build": "nx affected:build --all --configuration=production",
+    "build:web": "nx build web",
+    "build:api": "nx build api",
+    "postbuild": "cp -R ./config ./dist/",
     "test": "nx test"
   },
   "private": true,

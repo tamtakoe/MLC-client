@@ -5,6 +5,7 @@ import { AppModule } from './app/app.module';
 import { config, webConfig } from './environments/environment';
 
 async function bootstrap() {
+  console.log('CONFIG', config);
   const app = await NestFactory.create(AppModule, {
     logger: console,
   });

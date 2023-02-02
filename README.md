@@ -29,6 +29,11 @@ For comfortable work api-server asks IB credentials and saves token to the `conf
 
 Press `cmd/ctrl + C` to stop dev servers
 
+### Docker
+```sh
+docker build -t mlc-client .
+docker run -p 80:8080 mlc-client
+```
 
 ### Update dependencies
 ```sh
