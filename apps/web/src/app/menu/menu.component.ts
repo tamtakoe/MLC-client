@@ -62,6 +62,7 @@ export class MenuComponent implements OnInit {
     }
   }
 
+  mlc: any;
   menu: any = [];
   groupId = 0;
   targetGroupId: any = null;
@@ -72,9 +73,12 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.menuResource.getMenu().then((menu: any) => {
-      this.menu = menu;
+    this.menuResource.getMenu().then((data: any) => {
+      console.log(data);
+      this.mlc = data.mlc
+      this.menu = data.menus[0].groups;
       this.groupId = this.menu[0].id;
+      console.log(this.mlc, this.menu);
     })
   }
 
@@ -92,6 +96,9 @@ export class MenuComponent implements OnInit {
   }
 
   addToCart(item: any) {
+    if (isNaN(item.amount)) {
+      item.amount = 0;
+    }
     item.amount++;
     this.updateTotal();
   }
@@ -106,8 +113,8 @@ export class MenuComponent implements OnInit {
   updateTotal() {
     this.totalPrice = 0;
     this.menu.forEach((group: any) => {
-      group.items.forEach((item: any) => {
-        this.totalPrice += item.amount * item.price;
+      group.products.forEach((item: any) => {
+        this.totalPrice += (item.amount || 0) * item.price;
       })
     })
   }

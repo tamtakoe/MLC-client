@@ -9,5 +9,8 @@ export default {
     origin: /localhost:.*/,
     credentials: true
   },
+  routes: {
+    server: 'http://188.225.14.40:8067'
+  },
   root: 'dist/apps/web',
 };

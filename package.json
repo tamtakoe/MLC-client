@@ -1,6 +1,6 @@
 {
   "name": "mlc",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "ng": "nx",
@@ -16,6 +16,22 @@
   },
   "private": true,
   "dependencies": {
+    "@nestjs/axios": "^1.0.1",
+    "@nestjs/common": "^9.2.1",
+    "@nestjs/core": "^9.2.1",
+    "@nestjs/serve-static": "^3.0.0",
+    "cookie-parser": "^1.4.6",
+    "tslib": "^2.4.1",
+    "typescript": "~4.8.4"
+  },
+  "devDependencies": {
+    "@nestjs/platform-express": "^9.2.1",
+    "@nrwl/angular": "14.8.6",
+    "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.10.3",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "~7.8.0",
+    "zone.js": "~0.12.0",
     "@angular/animations": "~15.0.4",
     "@angular/common": "~15.0.4",
     "@angular/compiler": "~15.0.4",
@@ -24,21 +40,6 @@
     "@angular/platform-browser": "~15.0.4",
     "@angular/platform-browser-dynamic": "~15.0.4",
     "@angular/router": "~15.0.4",
-    "@nestjs/axios": "^1.0.1",
-    "@nestjs/common": "^9.2.1",
-    "@nestjs/core": "^9.2.1",
-    "@nestjs/platform-express": "^9.2.1",
-    "@nestjs/serve-static": "^3.0.0",
-    "@nrwl/angular": "14.8.6",
-    "bootstrap": "^5.2.3",
-    "bootstrap-icons": "^1.10.3",
-    "cookie-parser": "^1.4.6",
-    "reflect-metadata": "^0.1.13",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.4.1",
-    "zone.js": "~0.12.0"
-  },
-  "devDependencies": {
     "@angular-devkit/build-angular": "~15.0.5",
     "@angular-eslint/eslint-plugin": "~15.0.0",
     "@angular-eslint/eslint-plugin-template": "~15.0.0",
@@ -69,7 +70,6 @@
     "jest-preset-angular": "12.2.6",
     "oi-angular-resource": "^0.1.21",
     "prettier": "^2.7.1",
-    "ts-jest": "28.0.8",
-    "typescript": "~4.8.4"
+    "ts-jest": "28.0.8"
   }
 }

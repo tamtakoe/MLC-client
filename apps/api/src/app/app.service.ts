@@ -7,7 +7,7 @@ export class AppService {
     return [{
       id: 1,
       name: 'Закуски',
-      items: [{
+      products: [{
         id: 1,
         name: 'Бургер',
         imageS: 'burger.jpeg',

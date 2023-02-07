@@ -2,6 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { AxiosRequestConfig } from 'axios';
 import { HttpService } from '@nestjs/axios';
 import { AppService } from './app.service';
+import { config } from "../environments/environment";
 
 const httpService = new HttpService();
 
@@ -14,7 +15,7 @@ export class AppController {
     // return this.appService.getMenu();
 
     const axiosConfig: AxiosRequestConfig = {
-      url: 'http://188.225.14.40:8067/api/v1/mlc/info/1',
+      url: `${config.routes.server}/api/v1/mlc/info/1`,
       method: 'GET',
       responseType: 'json',
       // headers: {

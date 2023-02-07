@@ -7,5 +7,8 @@ export default {
   cors: {
     allowedHeaders: ['Accept', 'Accept-Language', 'Content-Language', 'Content-Type', 'Authorization', 'name', 'x-compress'],
   },
+  routes: {
+    server: 'http://188.225.14.40:8067'
+  },
   root: 'apps/web',
 };

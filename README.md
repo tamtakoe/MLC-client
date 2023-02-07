@@ -33,6 +33,9 @@ Press `cmd/ctrl + C` to stop dev servers
 ```sh
 docker build -t mlc-client .
 docker run -p 80:8080 mlc-client
+docker tag <IMAGE ID> tamtakoe/mlc-client:latest
+docker push tamtakoe/mlc-client:latest
+docker pull tamtakoe/mlc-client
 ```
 
 ### Update dependencies
