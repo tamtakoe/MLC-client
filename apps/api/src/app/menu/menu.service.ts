@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Message } from '@app/api-interfaces';
 
 @Injectable()
-export class AppService {
+export class MenuService {
   getMenu() {
     return [{
       id: 1,

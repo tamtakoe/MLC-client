@@ -32,7 +32,7 @@ Press `cmd/ctrl + C` to stop dev servers
 ### Docker
 ```sh
 docker build -t mlc-client .
-docker run -p 8081:8080 mlc-client
+docker run -d -p 8081:8080 --restart=on-failure:3 mlc-client #--rm
 
 docker tag <IMAGE ID> tamtakoe/mlc-client:latest
 docker push tamtakoe/mlc-client:latest

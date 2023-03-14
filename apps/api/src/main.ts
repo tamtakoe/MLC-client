@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { Request, urlencoded, json } from 'express';
-import * as cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import { AppModule } from './app/app.module';
 import { config, webConfig } from './environments/environment';
 

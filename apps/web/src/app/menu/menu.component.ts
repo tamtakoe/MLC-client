@@ -1,5 +1,6 @@
 import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import {MenuResource} from "../_resources/menu.resource";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-menu',
@@ -69,7 +70,7 @@ export class MenuComponent implements OnInit {
   totalPrice = 0;
   isPageMenuScrollingTimeoutId = 0;
 
-  constructor(private element: ElementRef, private menuResource: MenuResource) {
+  constructor(private element: ElementRef, private menuResource: MenuResource, public sanitizer: DomSanitizer) {
   }
 
   ngOnInit(): void {

@@ -1,18 +1,22 @@
 import {join} from 'path';
-import { Module } from '@nestjs/common';
+import {Module, MiddlewareConsumer, NestModule} from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MenuController } from './menu/menu.controller';
+import { MenuService } from './menu/menu.service';
+import {AssetsMiddlewareModule} from "./assets-middleware.module";
 
 @Module({
   imports: [
+    AssetsMiddlewareModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../web'),
+      exclude: ['/static(.*)']
     }),
     HttpModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, MenuController],
+  providers: [MenuService],
 })
 export class AppModule {}
