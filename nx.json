@@ -1,12 +1,4 @@
 {
-  "npmScope": "mlc",
-  "affected": {
-    "defaultBase": "main"
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular",
-    "packageManager": "npm"
-  },
   "implicitDependencies": {
     "package.json": {
       "dependencies": "*",
@@ -14,14 +6,7 @@
     },
     ".eslintrc.json": "*"
   },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
-    }
-  },
+  "npmScope": "mlc",
   "targetDependencies": {
     "build": [
       {
@@ -29,6 +14,26 @@
         "projects": "dependencies"
       }
     ]
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ]
+      }
+    }
+  },
+  "affected": {
+    "defaultBase": "main"
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "packageManager": "npm"
   },
   "generators": {
     "@nrwl/angular:application": {

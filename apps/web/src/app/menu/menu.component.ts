@@ -1,6 +1,6 @@
 import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import {MenuResource} from "../_resources/menu.resource";
-import {DomSanitizer} from "@angular/platform-browser";
+import {CartService} from "../cart/cart.service";
 
 @Component({
   selector: 'app-menu',
@@ -70,7 +70,9 @@ export class MenuComponent implements OnInit {
   totalPrice = 0;
   isPageMenuScrollingTimeoutId = 0;
 
-  constructor(private element: ElementRef, private menuResource: MenuResource, public sanitizer: DomSanitizer) {
+  constructor(private element: ElementRef,
+              private menuResource: MenuResource,
+              private cartService: CartService) {
   }
 
   ngOnInit(): void {
@@ -100,7 +102,9 @@ export class MenuComponent implements OnInit {
     if (isNaN(item.amount)) {
       item.amount = 0;
     }
+
     item.amount++;
+    this.cartService.addProduct(item);
     this.updateTotal();
   }
 
@@ -108,6 +112,7 @@ export class MenuComponent implements OnInit {
     if (item.amount) {
       item.amount--;
     }
+    this.cartService.deleteProduct(item);
     this.updateTotal();
   }
 

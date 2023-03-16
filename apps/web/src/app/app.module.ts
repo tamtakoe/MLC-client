@@ -8,11 +8,13 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule} from "@angular/forms";
 import {MenuResource} from "./_resources/menu.resource";
+import { CartComponent } from './cart/cart.component';
+import {OrderResource} from "./_resources/order.resource";
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, ErrorPageComponent],
+  declarations: [AppComponent, MenuComponent, ErrorPageComponent, CartComponent],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
-  providers: [MenuResource],
+  providers: [MenuResource, OrderResource],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

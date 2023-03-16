@@ -15,17 +15,17 @@
     </div>
 
     <div class="fixed-bottom w-100" *ngIf="totalPrice">
-        <button type="button" class="btn btn-success w-100">View order <b>{{totalPrice}} ₽</b></button>
+        <a routerLink="/cart" class="btn btn-success w-100">View order <b>{{totalPrice}} ₽</b></a>
     </div>
 
     <div class="menu-group-wrapper container pb-3" (scroll)="onScroll($event)">
 
         <div class="menu-group" *ngFor="let group of menu" id="b-{{group.id}}">
-            <div class="fs-1 mt-4 mb-2 text-uppercase fw-bold" >{{group.name}}</div>
+            <h1 class="mt-4 mb-2 text-uppercase fw-bold" >{{group.name}}</h1>
             <div class="menu-grid">
 
                 <div class="menu-item p-1 fs-6" *ngFor="let item of group.products">
-                    <img class="menu-item-img" [src]="sanitizer.bypassSecurityTrustResourceUrl(item.photoLinks)">
+                    <img class="menu-item-img" [src]="item.photoLinks">
                     <div class="menu-item-title mt-2 mb-3">{{item.name}}</div>
                     <div class="menu-item-action">
                         <div *ngIf="!item.amount">
