@@ -4,11 +4,11 @@ import { HttpService } from '@nestjs/axios';
 import { config } from "../../environments/environment";
 
 @Controller('api')
-export class MenuController {
+export class OrderController {
   constructor(private readonly httpService: HttpService) {}
 
-  @Post('order')
-  createOrder(@Body() body?) {
+  @Post('orders')
+  createOrder(@Body() body: any) {
     const axiosRequestConfig: AxiosRequestConfig = {
       url: `${config.routes.server}/api/v1/order/new`,
       method: 'POST',
@@ -20,7 +20,7 @@ export class MenuController {
     return this.httpService.request(axiosRequestConfig).toPromise()
   }
 
-  @Post('order/product')
+  @Post('orders/product')
   addProduct(@Body() body) {
     const axiosRequestConfig: AxiosRequestConfig = {
       url: `${config.routes.server}/api/v1/order/add`,
@@ -33,7 +33,7 @@ export class MenuController {
     return this.httpService.request(axiosRequestConfig).toPromise()
   }
 
-  @Delete('order/product')
+  @Delete('orders/product')
   deleteProduct(@Body() body) {
     const axiosRequestConfig: AxiosRequestConfig = {
       url: `${config.routes.server}/api/v1/order/delete`,

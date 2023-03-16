@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { MenuController } from './menu/menu.controller';
 import { MenuService } from './menu/menu.service';
 import {AssetsMiddlewareModule} from "./assets-middleware.module";
+import {OrderController} from "./order/order.controller";
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import {AssetsMiddlewareModule} from "./assets-middleware.module";
     }),
     HttpModule,
   ],
-  controllers: [AppController, MenuController],
+  controllers: [AppController, MenuController, OrderController],
   providers: [MenuService],
 })
 export class AppModule {}

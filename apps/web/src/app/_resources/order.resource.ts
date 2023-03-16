@@ -6,7 +6,7 @@ import {
 
 @Injectable()
 @HttpConfig({
-  url: '/order',
+  url: '/orders',
 })
 @LocalStorageConfig({
   name: 'order',
@@ -14,15 +14,13 @@ import {
   transformResponse: orderArr => new Map(JSON.parse(orderArr).map((obj: any) => [obj.id, obj]))
 })
 export class OrderResource extends ApiResource {
-  createOrder = Post({
-    url: ''
-  });
+  createOrder = Post();
 
   addProduct = Post({
-      url: 'product'
+      url: '/orders/product'
   })
 
   deleteProduct = Post({
-    url: 'product'
+    url: '/orders/product'
   })
 }

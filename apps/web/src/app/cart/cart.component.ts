@@ -15,7 +15,7 @@ export class CartComponent implements OnInit {
   }
 
   saveOrder() {
-
+    this.cartService.createOrder()
   }
 
 }
