@@ -16,6 +16,18 @@ import {
 export class OrderResource extends ApiResource {
   createOrder = Post();
 
+  submitOrder = Put({
+    url: '/orders/:id/submit'
+  })
+
+  changeOrderStatus = Put({
+    url: '/orders/:id/status/:type'
+  })
+
+  completeOrder = Put({
+    url: '/orders/complete'
+  })
+
   addProduct = Post({
       url: '/orders/product'
   })

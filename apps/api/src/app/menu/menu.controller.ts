@@ -19,11 +19,8 @@ export class MenuController {
     }
 
     // @ts-ignore
-    return this.httpService.request(axiosRequestConfig).toPromise().then((data: any) => {
-      // console.log(data)
-      return data.data;
-
-    })
+    return this.httpService.request(axiosRequestConfig).toPromise()
+        .then(data => data.data)
         .then(data => { // Replace image links from absolute to relative /static
           data.menus.forEach(menu => {
             menu.groups.forEach(group => {
