@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderComponent implements OnInit {
 
+  webApp: any
+
   constructor() { }
 
   ngOnInit(): void {
+    // @ts-ignore
+    this.webApp = JSON.stringify(window.Telegram.WebApp, null, 2)
   }
 
 }
