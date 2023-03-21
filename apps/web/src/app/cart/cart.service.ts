@@ -36,7 +36,7 @@ export class CartService {
       return Promise.all(promises).then(data => {
         return this.orderResource.completeOrder().then(() => {
           this.orderResource.removeFromLocalStorage()
-          this.router.navigate([''] );
+          this.router.navigate(['order'] );
         })
       })
     })

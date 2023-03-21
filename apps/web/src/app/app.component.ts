@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor() {
+    // @ts-ignore
+    console.log('WebApp:', window.Telegram.WebApp);
+  }
 }

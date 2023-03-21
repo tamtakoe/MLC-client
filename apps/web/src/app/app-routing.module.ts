@@ -4,9 +4,12 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import {AppComponent} from "./app.component";
 import {MenuComponent} from "./menu/menu.component";
 import {CartComponent} from "./cart/cart.component";
+import {OrderComponent} from "./order/order.component";
 const MAIN_ROUTES: Routes = [
   { path: '',   component: MenuComponent},
+  { path: 'menu',   component: MenuComponent},
   { path: 'cart',   component: CartComponent},
+  { path: 'order',   component: OrderComponent},
   { path: 'test',   component: AppComponent},
   { path: '**', component: ErrorPageComponent }
 ];
