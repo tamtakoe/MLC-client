@@ -14,5 +14,7 @@ declare global {
 export class AppComponent {
   constructor() {
     console.log('Telegram:', window.Telegram);
+    console.log('initData:', window.Telegram.WebApp.initData, 'platform:', window.Telegram.WebApp.platform)
+    console.log(window.Telegram.WebApp.platform === 'unknown');
   }
 }

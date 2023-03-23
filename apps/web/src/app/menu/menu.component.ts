@@ -75,23 +75,21 @@ export class MenuComponent implements OnInit {
               private menuResource: MenuResource,
               private cartService: CartService,
               private router: Router) {
+
+    window.Telegram.WebApp.expand()
+    window.Telegram.WebApp.BackButton.hide()
+    window.Telegram.WebApp.MainButton.color = "rgb(49, 181, 69)"
+    window.Telegram.WebApp.onEvent('mainButtonClicked', () => {
+      this.router.navigate(['cart'] );
+    })
   }
 
   ngOnInit(): void {
+    this.updateTotal()
     this.menuResource.getMenu().then((data: any) => {
       this.mlc = data.mlc
       this.menu = data.menus[0].groups;
       this.groupId = this.menu[0].id;
-    })
-
-    Object.assign(window.Telegram.WebApp.MainButton, {
-      color: "rgb(49, 181, 69)",
-      text: "View order"
-    })
-
-    window.Telegram.WebApp.onEvent('mainButtonClicked', (e: any) => {
-      console.log('E:', e);
-      this.router.navigate(['order'] );
     })
   }
 
@@ -133,7 +131,10 @@ export class MenuComponent implements OnInit {
         this.totalPrice += (item.amount || 0) * item.price;
       })
     })
-    // window.Telegram.WebApp.MainButton.isVisible = !!this.totalPrice
-    window.Telegram.WebApp.MainButton.show()
+
+    window.Telegram.WebApp.MainButton.text = `View order ${this.totalPrice} ₽`
+    this.totalPrice
+        ? window.Telegram.WebApp.MainButton.show()
+        : window.Telegram.WebApp.MainButton.hide()
   }
 }
