@@ -2,6 +2,7 @@ import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import {MenuResource} from "../_resources/menu.resource";
 import {CartService} from "../cart/cart.service";
 import {Router} from "@angular/router";
+import {MainButton} from "../_services/main-button";
 
 @Component({
   selector: 'app-menu',
@@ -74,12 +75,14 @@ export class MenuComponent implements OnInit {
   constructor(private element: ElementRef,
               private menuResource: MenuResource,
               private cartService: CartService,
+              private mainButton: MainButton,
               private router: Router) {
 
     window.Telegram.WebApp.expand()
     window.Telegram.WebApp.BackButton.hide()
-    window.Telegram.WebApp.MainButton.color = "rgb(49, 181, 69)"
-    window.Telegram.WebApp.onEvent('mainButtonClicked', () => {
+    this.mainButton.setType('success')
+    // this.mainButton.showProgress()
+    this.mainButton.onClick(() => {
       this.router.navigate(['cart'] );
     })
   }
@@ -132,9 +135,9 @@ export class MenuComponent implements OnInit {
       })
     })
 
-    window.Telegram.WebApp.MainButton.text = `View order ${this.totalPrice} ₽`
-    this.totalPrice
-        ? window.Telegram.WebApp.MainButton.show()
-        : window.Telegram.WebApp.MainButton.hide()
+    this.mainButton.setParams({
+      visible: !!this.totalPrice,
+      text: `View order ${this.totalPrice} ₽`
+    })
   }
 }

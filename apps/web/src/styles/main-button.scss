@@ -1,0 +1,15 @@
+.app-mainButton {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 2147483642;
+}
+
+.app-mainButton > button {
+  text-align: center;
+  width: 100%;
+  border-radius: 0;
+  padding: 20px 0 20px;
+  --bs-progress-height: 1rem;
+}

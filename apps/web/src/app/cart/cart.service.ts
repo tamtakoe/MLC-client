@@ -24,7 +24,7 @@ export class CartService {
   }
 
   createOrder() {
-    this.orderResource.createOrder({}).then((order: any) => {
+    return this.orderResource.createOrder({}).then((order: any) => {
       const promises = [];
       this.order = order;
 

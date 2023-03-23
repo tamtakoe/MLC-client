@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {BackButton} from "../_services/back-button";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-order',
@@ -7,13 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderComponent implements OnInit {
 
-  webApp: any
+  webApp = ''
+  info = ''
 
-  constructor() { }
+  constructor(private router: Router, private backButton: BackButton) {
+    this.backButton.onClick(() => {
+      this.router.navigate(['cart'] );
+    })
+    this.backButton.show()
+  }
 
   ngOnInit(): void {
-    // @ts-ignore
     this.webApp = JSON.stringify(window.Telegram.WebApp, null, 2)
+    this.info = document.referrer
   }
 
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {CartService} from "./cart.service";
 import {Router} from "@angular/router";
+import {MainButton} from "../_services/main-button";
+import {BackButton} from "../_services/back-button";
 
 @Component({
   selector: 'app-cart',
@@ -9,21 +11,20 @@ import {Router} from "@angular/router";
 })
 export class CartComponent implements OnInit {
 
-  constructor(public cartService: CartService, private router: Router) {
+  constructor(public cartService: CartService,
+              private router: Router,
+              private mainButton: MainButton,
+              private backButton: BackButton) {
 
-    window.Telegram.WebApp.MainButton.color = "rgb(49, 181, 69)"
-    window.Telegram.WebApp.onEvent('mainButtonClicked', () => {
+    this.mainButton.onClick(() => {
       this.cartService.createOrder()
     })
+    this.mainButton.setText(`Pay ${this.cartService.getTotalPrice()} ₽`)
 
-    window.Telegram.WebApp.MainButton.text = `Pay ${this.cartService.getTotalPrice()} ₽`
-    // this.totalPrice
-    //     ? window.Telegram.WebApp.MainButton.show()
-    //     : window.Telegram.WebApp.MainButton.hide()
-    window.Telegram.WebApp.onEvent('backButtonClicked', () => {
-      this.router.navigate(['main'] );
+    this.backButton.onClick(() => {
+      this.router.navigate(['menu'] );
     })
-    window.Telegram.WebApp.BackButton.show()
+    this.backButton.show()
   }
 
   ngOnInit(): void {
@@ -31,7 +32,11 @@ export class CartComponent implements OnInit {
   }
 
   saveOrder() {
+    this.mainButton.showProgress()
     this.cartService.createOrder()
+      .finally(() => {
+        // this.mainButton.hideProgress()
+      })
   }
 
 }
