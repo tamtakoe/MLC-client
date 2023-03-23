@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, Inject} from '@angular/core';
+
+declare global {
+  interface Window {
+    Telegram: any;
+  }
+}
 
 @Component({
   selector: 'app-root',
@@ -7,7 +13,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   constructor() {
-    // @ts-ignore
-    console.log('WebApp:', window.Telegram.WebApp);
+    console.log('Telegram:', window.Telegram);
   }
 }

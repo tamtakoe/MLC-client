@@ -1,6 +1,7 @@
 import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import {MenuResource} from "../_resources/menu.resource";
 import {CartService} from "../cart/cart.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-menu',
@@ -72,16 +73,25 @@ export class MenuComponent implements OnInit {
 
   constructor(private element: ElementRef,
               private menuResource: MenuResource,
-              private cartService: CartService) {
+              private cartService: CartService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     this.menuResource.getMenu().then((data: any) => {
-      console.log(data);
       this.mlc = data.mlc
       this.menu = data.menus[0].groups;
       this.groupId = this.menu[0].id;
-      console.log(this.mlc, this.menu);
+    })
+
+    Object.assign(window.Telegram.WebApp.MainButton, {
+      color: "rgb(49, 181, 69)",
+      text: "View order"
+    })
+
+    window.Telegram.WebApp.onEvent('mainButtonClicked', (e: any) => {
+      console.log('E:', e);
+      this.router.navigate(['order'] );
     })
   }
 
@@ -123,5 +133,7 @@ export class MenuComponent implements OnInit {
         this.totalPrice += (item.amount || 0) * item.price;
       })
     })
+    // window.Telegram.WebApp.MainButton.isVisible = !!this.totalPrice
+    window.Telegram.WebApp.MainButton.show()
   }
 }
