@@ -74,6 +74,8 @@ export class MainButton {
   }
 
   setText(text: string) {
+    this.telegramMainButton.setText(text)
+
     this.buttonElement.innerHTML = text
     this.text = text
   }

@@ -10,7 +10,7 @@ export class BackButton {
   visible: boolean = false;
   onClickHandler?: () => void = () => {}
 
-  telegramBackButton = window?.Telegram?.WebApp?.MainButton
+  telegramBackButton = window?.Telegram?.WebApp?.BackButton
 
   constructor() {}
 
@@ -48,7 +48,6 @@ export class BackButton {
   }
 
   setParams(params: ButtonParams) {
-
     if (params.visible !== undefined) {
       params.visible
           ? this.show()

@@ -35,7 +35,7 @@ export class CartComponent implements OnInit {
     this.mainButton.showProgress()
     this.cartService.createOrder()
       .finally(() => {
-        // this.mainButton.hideProgress()
+        this.mainButton.hideProgress()
       })
   }
 

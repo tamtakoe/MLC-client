@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BackButton} from "../_services/back-button";
 import {Router} from "@angular/router";
+import {MainButton} from "../_services/main-button";
 
 @Component({
   selector: 'app-order',
@@ -12,11 +13,14 @@ export class OrderComponent implements OnInit {
   webApp = ''
   info = ''
 
-  constructor(private router: Router, private backButton: BackButton) {
+  constructor(private router: Router,
+              private mainButton: MainButton,
+              private backButton: BackButton) {
     this.backButton.onClick(() => {
       this.router.navigate(['cart'] );
     })
     this.backButton.show()
+    this.mainButton.showProgress()
   }
 
   ngOnInit(): void {
