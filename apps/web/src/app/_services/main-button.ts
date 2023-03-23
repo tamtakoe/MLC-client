@@ -51,12 +51,23 @@ export class MainButton {
 
   element: HTMLElement;
   buttonElement: HTMLElement;
+  preloaderElement: HTMLElement;
 
   telegramMainButton = window?.Telegram?.WebApp?.MainButton
+  isTelegramApp =  window?.Telegram?.WebApp?.initData && !!this.telegramMainButton
 
   constructor() {
     this.element = document.getElementById('mainButton') as HTMLElement;
-    this.element.innerHTML = `<button type="button" class="btn"></button>`
+    this.element.innerHTML = `<button type="button" class="btn"></button>
+      <div class="app-mainButton-preloader ng-hide">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="50px" viewBox="0 0 40 40" preserveAspectRatio="xMidYMid">
+          <circle cx="20" cy="20" fill="none" stroke="#ffffff" stroke-width="2" r="10" stroke-dasharray="32.98672286269283 12.995574287564276">
+            <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 20 20;360 20 20" keyTimes="0;1"></animateTransform>
+          </circle>
+        </svg>
+      </div>`
+
+    this.preloaderElement = this.element.getElementsByTagName('div').item(0) as HTMLElement;
     this.buttonElement = this.element.getElementsByTagName('button').item(0) as HTMLElement;
     this.buttonElement.onclick = () => {
       if (this.onClickHandler) {
@@ -71,6 +82,7 @@ export class MainButton {
     classList(this.buttonElement).remove('btn-' + this.type)
     classList(this.buttonElement).add('btn-' + type)
     this.type = type
+    return this;
   }
 
   setText(text: string) {
@@ -78,6 +90,7 @@ export class MainButton {
 
     this.buttonElement.innerHTML = text
     this.text = text
+    return this;
   }
 
   show() {
@@ -85,6 +98,7 @@ export class MainButton {
 
     classList(this.element).remove('ng-hide')
     this.visible = true
+    return this;
   }
 
   hide() {
@@ -92,6 +106,7 @@ export class MainButton {
 
     classList(this.element).add('ng-hide')
     this.visible = false
+    return this;
   }
 
   enable() {
@@ -99,6 +114,7 @@ export class MainButton {
 
     this.buttonElement.removeAttribute('disabled')
     this.disabled = false
+    return this;
   }
 
   disable() {
@@ -106,22 +122,25 @@ export class MainButton {
 
     this.buttonElement.setAttribute('disabled', 'true')
     this.disabled = true
+    return this;
   }
 
   showProgress(leaveActive?: boolean) {
     this.telegramMainButton.showProgress(leaveActive)
 
-    classList(this.buttonElement).add(['progress-bar-striped', 'progress-bar-animated'])
+    classList(this.preloaderElement).remove('ng-hide')
     this.disable()
     this.progress = true
+    return this;
   }
 
   hideProgress() {
     this.telegramMainButton.hideProgress()
 
-    classList(this.buttonElement).remove(['progress-bar-striped', 'progress-bar-animated'])
+    classList(this.preloaderElement).add('ng-hide')
     this.enable()
     this.progress = false
+    return this;
   }
 
   onClick(handler?: () => void) {
@@ -129,11 +148,13 @@ export class MainButton {
     this.telegramMainButton.onClick(handler)
 
     this.onClickHandler = handler;
+    return this;
   }
 
   offClick() {
     this.telegramMainButton.offClick(this.onClickHandler)
     this.onClickHandler = undefined;
+    return this;
   }
 
   setParams(params: ButtonParams) {
@@ -168,5 +189,6 @@ export class MainButton {
           ? this.onClick(params.onClick)
           : this.offClick()
     }
+    return this;
   }
 }

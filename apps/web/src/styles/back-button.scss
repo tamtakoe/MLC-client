@@ -1,0 +1,11 @@
+.app-backButton::before {
+  content: '←';
+}
+.app-backButton {
+  cursor: pointer;
+  color: #0d6efd;
+  position: fixed;
+  padding-left: 0.5em;
+  font-weight: bold;
+  font-size: 2em;
+}

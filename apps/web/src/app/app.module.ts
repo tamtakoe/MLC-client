@@ -14,9 +14,11 @@ import { OrderComponent } from './order/order.component';
 import {FlashMessage} from "./_services/flash-message";
 import {MainButton} from "./_services/main-button";
 import {BackButton} from "./_services/back-button";
+import {PreloaderComponent} from "./_components/preloader/preloader.component";
+import { AdminMenuComponent } from './admin-menu/admin-menu.component';
 
 @NgModule({
-  declarations: [AppComponent, ErrorPageComponent, MenuComponent, CartComponent, OrderComponent],
+  declarations: [AppComponent, ErrorPageComponent, PreloaderComponent, MenuComponent, CartComponent, OrderComponent, AdminMenuComponent],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [FlashMessage, MainButton, BackButton, MenuResource, OrderResource],
   bootstrap: [AppComponent],

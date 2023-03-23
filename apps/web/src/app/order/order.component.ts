@@ -17,10 +17,9 @@ export class OrderComponent implements OnInit {
               private mainButton: MainButton,
               private backButton: BackButton) {
     this.backButton.onClick(() => {
-      this.router.navigate(['cart'] );
+      this.router.navigate(['menu'] );
     })
     this.backButton.show()
-    this.mainButton.showProgress()
   }
 
   ngOnInit(): void {

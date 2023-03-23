@@ -16,15 +16,19 @@ export class CartComponent implements OnInit {
               private mainButton: MainButton,
               private backButton: BackButton) {
 
-    this.mainButton.onClick(() => {
-      this.cartService.createOrder()
-    })
-    this.mainButton.setText(`Pay ${this.cartService.getTotalPrice()} ₽`)
+    this.mainButton
+        .onClick(() => {
+          this.cartService.createOrder()
+        })
+        .setType('success')
+        .setText(`Pay ${this.cartService.getTotalPrice()} ₽`)
+        .show()
 
-    this.backButton.onClick(() => {
-      this.router.navigate(['menu'] );
-    })
-    this.backButton.show()
+    this.backButton
+        .onClick(() => {
+          this.router.navigate(['menu'] );
+        })
+        .show()
   }
 
   ngOnInit(): void {

@@ -1,0 +1,18 @@
+.loader-icon {
+  font-size: 1.5em;
+  line-height: 1.8em;
+}
+
+.loader-icon svg {
+  fill: #3d5869;
+  animation: spin 2s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}

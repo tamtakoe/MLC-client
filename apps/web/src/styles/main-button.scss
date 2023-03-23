@@ -9,7 +9,15 @@
 .app-mainButton > button {
   text-align: center;
   width: 100%;
+  font-weight: bold;
   border-radius: 0;
-  padding: 15px 0 15px;
+  padding: 12px 0 12px;
   --bs-progress-height: 1rem;
+}
+
+.app-mainButton-preloader {
+  position: absolute;
+  width: 50px;
+  top: 0;
+  right: 0;
 }

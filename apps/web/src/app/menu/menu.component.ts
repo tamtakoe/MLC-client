@@ -80,11 +80,12 @@ export class MenuComponent implements OnInit {
 
     window.Telegram.WebApp.expand()
     window.Telegram.WebApp.BackButton.hide()
-    this.mainButton.setType('success')
-    // this.mainButton.showProgress()
-    this.mainButton.onClick(() => {
-      this.router.navigate(['cart'] );
-    })
+
+    this.mainButton
+        .onClick(() => {
+          this.router.navigate(['cart'] );
+        })
+        .setType('success')
   }
 
   ngOnInit(): void {
