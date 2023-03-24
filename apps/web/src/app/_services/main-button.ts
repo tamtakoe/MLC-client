@@ -69,90 +69,122 @@ export class MainButton {
 
     this.preloaderElement = this.element.getElementsByTagName('div').item(0) as HTMLElement;
     this.buttonElement = this.element.getElementsByTagName('button').item(0) as HTMLElement;
-    this.buttonElement.onclick = () => {
-      if (this.onClickHandler) {
-        this.onClickHandler();
-      }
-    };
+
+    if (!this.isTelegramApp) {
+      this.buttonElement.onclick = () => {
+        if (this.onClickHandler) {
+          this.onClickHandler();
+        }
+      };
+    }
   }
 
   setType(type: ButtonType) {
-    this.telegramMainButton.color = "rgb(49, 181, 69)"
+    if (this.isTelegramApp) {
+      this.telegramMainButton.color = "rgb(49, 181, 69)"
+    } else {
+      classList(this.buttonElement).remove('btn-' + this.type)
+      classList(this.buttonElement).add('btn-' + type)
+    }
 
-    classList(this.buttonElement).remove('btn-' + this.type)
-    classList(this.buttonElement).add('btn-' + type)
     this.type = type
     return this;
   }
 
   setText(text: string) {
-    this.telegramMainButton.setText(text)
+    if (this.isTelegramApp) {
+      this.telegramMainButton.setText(text)
+    } else {
+      this.buttonElement.innerHTML = text
+    }
 
-    this.buttonElement.innerHTML = text
     this.text = text
     return this;
   }
 
   show() {
-    this.telegramMainButton.show()
+    if (this.isTelegramApp) {
+      this.telegramMainButton.show()
+    } else {
+      classList(this.element).remove('ng-hide')
+    }
 
-    classList(this.element).remove('ng-hide')
     this.visible = true
     return this;
   }
 
   hide() {
-    this.telegramMainButton.hide()
+    if (this.isTelegramApp) {
+      this.telegramMainButton.hide()
+    } else {
+      classList(this.element).add('ng-hide')
+    }
 
-    classList(this.element).add('ng-hide')
     this.visible = false
     return this;
   }
 
   enable() {
-    this.telegramMainButton.enable()
+    if (this.isTelegramApp) {
+      this.telegramMainButton.enable()
+    } else {
+      this.buttonElement.removeAttribute('disabled')
+    }
 
-    this.buttonElement.removeAttribute('disabled')
     this.disabled = false
     return this;
   }
 
   disable() {
-    this.telegramMainButton.disable()
+    if (this.isTelegramApp) {
+      this.telegramMainButton.disable()
+    } else {
+      this.buttonElement.setAttribute('disabled', 'true')
+    }
 
-    this.buttonElement.setAttribute('disabled', 'true')
     this.disabled = true
     return this;
   }
 
   showProgress(leaveActive?: boolean) {
-    this.telegramMainButton.showProgress(leaveActive)
+    if (this.isTelegramApp) {
+      this.telegramMainButton.showProgress(leaveActive)
+    } else {
+      classList(this.preloaderElement).remove('ng-hide')
+      this.disable()
+    }
 
-    classList(this.preloaderElement).remove('ng-hide')
-    this.disable()
     this.progress = true
     return this;
   }
 
   hideProgress() {
-    this.telegramMainButton.hideProgress()
+    if (this.isTelegramApp) {
+      this.telegramMainButton.hideProgress()
+    } else {
+      classList(this.preloaderElement).add('ng-hide')
+      this.enable()
+    }
 
-    classList(this.preloaderElement).add('ng-hide')
-    this.enable()
     this.progress = false
     return this;
   }
 
   onClick(handler?: () => void) {
-    this.telegramMainButton.offClick(this.onClickHandler)
-    this.telegramMainButton.onClick(handler)
+    if (this.isTelegramApp) {
+      this.telegramMainButton.offClick(this.onClickHandler)
+      this.telegramMainButton.onClick(handler)
+    }
 
     this.onClickHandler = handler;
     return this;
   }
 
   offClick() {
-    this.telegramMainButton.offClick(this.onClickHandler)
+    if (this.isTelegramApp) {
+      this.telegramMainButton.offClick(this.onClickHandler)
+    }
+
     this.onClickHandler = undefined;
     return this;
   }
