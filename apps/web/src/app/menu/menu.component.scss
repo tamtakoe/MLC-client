@@ -1,45 +1,13 @@
+@import '../../../../../node_modules/bootstrap/scss/functions';
+@import '../../../../../node_modules/bootstrap/scss/variables';
+@import '../../../../../node_modules/bootstrap/scss/mixins';
+
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 0.5em;
   grid-row-gap: 1em;
 }
-
-// Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) {
-  .menu-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {
-  .menu-grid {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) {
-  .menu-grid {
-    grid-template-columns: repeat(7, 1fr);
-  }
-}
-
-// X-Large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {
-  .menu-grid {
-    grid-template-columns: repeat(9, 1fr);
-  }
-}
-
-// XX-Large devices (larger desktops, 1400px and up)
-@media (min-width: 1400px) {
-  .menu-grid {
-    grid-template-columns: repeat(10, 1fr);
-  }
-}
-
 
 .menu-groups-wrapper {
   height: 40px;
@@ -48,6 +16,8 @@
 .menu-group-wrapper {
   height: calc(100vh - 40px);
   overflow-y: auto;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .menu-item {
@@ -88,3 +58,45 @@
   display: flex;
 }
 
+// Small devices (landscape phones, 576px and up)
+@include media-breakpoint-up(sm) {
+  .menu-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .menu-group-wrapper {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@include media-breakpoint-up(md) {
+  .menu-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@include media-breakpoint-up(lg) {
+  .menu-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .menu-group-wrapper {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+}
+
+// X-Large devices (large desktops, 1200px and up)
+@include media-breakpoint-up(xl) {
+  .menu-grid {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+
+// XX-Large devices (larger desktops, 1400px and up)
+@include media-breakpoint-up(xxl) {
+  .menu-grid {
+    grid-template-columns: repeat(10, 1fr);
+  }
+}

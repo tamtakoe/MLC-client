@@ -20,6 +20,14 @@ export class OrderComponent implements OnInit {
       this.router.navigate(['menu'] );
     })
     this.backButton.show()
+
+    this.mainButton.hide();
+        // .onClick(() => {
+        //   this.router.navigate(['menu'] );
+        // })
+        // .setType('success')
+        // .setText(`Menu`)
+        // .show()
   }
 
   ngOnInit(): void {
