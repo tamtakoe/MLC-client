@@ -8,6 +8,8 @@ import { MenuService } from './menu/menu.service';
 import {AssetsMiddlewareModule} from "./assets-middleware.module";
 import {OrderController} from "./order/order.controller";
 import {BackendService} from "./_services/backend.service";
+import {UsersController} from "./users/users.controller";
+import {AuthService} from "./_services/auth.service";
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import {BackendService} from "./_services/backend.service";
     }),
     HttpModule,
   ],
-  controllers: [AppController, MenuController, OrderController],
-  providers: [MenuService, BackendService],
+  controllers: [AppController, MenuController, OrderController, UsersController],
+  providers: [MenuService, BackendService, AuthService],
 })
 export class AppModule {}

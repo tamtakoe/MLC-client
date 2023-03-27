@@ -16,7 +16,7 @@
   },
   "private": true,
   "dependencies": {
-    "@nestjs/axios": "^1.0.1",
+    "@nestjs/axios": "^2.0.0",
     "@nestjs/common": "^9.2.1",
     "@nestjs/core": "^9.2.1",
     "@nestjs/serve-static": "^3.0.0",

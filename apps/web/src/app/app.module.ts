@@ -16,11 +16,12 @@ import {MainButton} from "./_services/main-button";
 import {BackButton} from "./_services/back-button";
 import {PreloaderComponent} from "./_components/preloader/preloader.component";
 import { AdminMenuComponent } from './admin-menu/admin-menu.component';
+import {UsersResource} from "./_resources/users.resource";
 
 @NgModule({
   declarations: [AppComponent, ErrorPageComponent, PreloaderComponent, MenuComponent, CartComponent, OrderComponent, AdminMenuComponent],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
-  providers: [FlashMessage, MainButton, BackButton, MenuResource, OrderResource],
+  providers: [FlashMessage, MainButton, BackButton, MenuResource, OrderResource, UsersResource],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
