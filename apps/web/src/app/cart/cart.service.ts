@@ -42,7 +42,7 @@ export class CartService {
             })
           })
           .catch(error => {
-            this.flashMessage.error(error, { description: JSON.stringify(error) })
+            this.flashMessage.error('Error while order creation', { description: JSON.stringify(error) })
           })
     })
   }
