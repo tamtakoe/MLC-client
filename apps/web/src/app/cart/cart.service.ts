@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {OrderResource} from "../_resources/order.resource";
 import {Router} from "@angular/router";
+import {FlashMessage} from "../_services/flash-message";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class CartService {
   cart = new Map()
   order: any
 
-  constructor(private orderResource: OrderResource, private router: Router) {
+  constructor(private orderResource: OrderResource, private router: Router, private flashMessage: FlashMessage) {
     this.cart = this.orderResource.loadFromLocalStorage() || new Map()
   }
 
@@ -33,12 +34,16 @@ export class CartService {
         promises.push(promise);
       }
 
-      return Promise.all(promises).then(data => {
-        return this.orderResource.completeOrder().then(() => {
-          this.orderResource.removeFromLocalStorage()
-          this.router.navigate(['order'] );
-        })
-      })
+      return Promise.all(promises)
+          .then(data => {
+            return this.orderResource.completeOrder().then(() => {
+              this.orderResource.removeFromLocalStorage()
+              this.router.navigate(['order'] );
+            })
+          })
+          .catch(error => {
+            this.flashMessage.error(error, { description: JSON.stringify(error) })
+          })
     })
   }
 
