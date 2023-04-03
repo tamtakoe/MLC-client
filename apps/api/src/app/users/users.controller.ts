@@ -9,13 +9,13 @@ export class UsersController {
   constructor(private readonly backendService: BackendService, private authService: AuthService) {}
 
   @Get('users/current/token')
-  getUserToken(@Query('telegramId') telegramId: number) {
-    return this.authService.getUserToken(telegramId)
+  getUserToken(@Query('telegramId') telegramId: number, @Query('mlcId') mlcId: number) {
+    return this.authService.getUserToken(telegramId, mlcId)
   }
 
   @Post('users/current/authorize')
   authorizeUser(@Body() user, @Res({ passthrough: true }) res) {
-    return this.authService.getUserToken(user.id)
+    return this.authService.getUserToken(user.id, user.mlcId)
         .then(auth => {
           console.log('++++++ setCookie: authToken=', auth.token);
           res.cookie('authToken', auth.token, { maxAge: 900000, httpOnly: true, sameSite: 'strict', secure: true });

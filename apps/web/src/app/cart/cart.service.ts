@@ -7,11 +7,16 @@ import {FlashMessage} from "../_services/flash-message";
   providedIn: 'root'
 })
 export class CartService {
+  mlc: any
   cart = new Map()
   order: any
 
   constructor(private orderResource: OrderResource, private router: Router, private flashMessage: FlashMessage) {
     this.cart = this.orderResource.loadFromLocalStorage() || new Map()
+  }
+
+  setMlc(mlc: any) {
+      this.mlc = mlc;
   }
 
   getCart() {

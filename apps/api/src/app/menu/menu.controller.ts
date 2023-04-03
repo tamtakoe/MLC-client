@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import {Controller, Get, Query} from '@nestjs/common';
 import { AxiosRequestConfig } from 'axios';
 import { HttpService } from '@nestjs/axios';
 import { MenuService } from './menu.service';
@@ -9,11 +9,11 @@ export class MenuController {
   constructor(private readonly httpService: HttpService, private readonly menuService: MenuService) {}
 
   @Get('menu')
-  getMenu() {
+  getMenu(@Query('mlcId') mlcId: number) {
     // return this.menuService.getMenu();
 
     const axiosRequestConfig: AxiosRequestConfig = {
-      url: `${config.routes.server}/api/v1/mlc/info/1`,
+      url: `${config.routes.server}/api/v1/mlc/info/${mlcId}`,
       method: 'GET',
       responseType: 'json',
     }

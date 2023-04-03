@@ -1,8 +1,103 @@
 <div class="order mb-5">
-    <div class="container bg-white">
+    <div class="ps-4 bg-white">
         <div class="pt-4 mb-4">
-            <h1 class="ms-2 text-uppercase fw-bold">Admin. Menu</h1>
+            <h3 class="ms-2 text-uppercase fw-bold">Admin. Menu</h3>
         </div>
 
+    </div>
+
+<!--    <div>-->
+<!--        <p>-->
+<!--            <button-->
+<!--                    type="button"-->
+<!--                    class="btn btn-outline-primary"-->
+<!--                    (click)="collapse.toggle()"-->
+<!--                    [attr.aria-expanded]="!isCollapsed"-->
+<!--                    aria-controls="collapseExample"-->
+<!--            >-->
+<!--                Toggle with Function-->
+<!--            </button>-->
+<!--            <button-->
+<!--                    type="button"-->
+<!--                    class="btn btn-outline-primary ms-2"-->
+<!--                    (click)="isCollapsed = ! isCollapsed"-->
+<!--                    [attr.aria-expanded]="!isCollapsed"-->
+<!--                    aria-controls="collapseExample"-->
+<!--            >-->
+<!--                Toggle with Two Way Binding-->
+<!--            </button>-->
+<!--        </p>-->
+<!--        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">-->
+<!--            <div class="card">-->
+<!--                <div class="card-body">You can collapse this card by clicking one Toggle button</div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <div class="menu-group-wrapper pb-3">
+
+        <div class="menu-group" *ngFor="let group of menu">
+            <div class="row">
+                <div class="col-auto flex-grow-1">
+                    <h1 class="text-uppercase fw-bold" >
+                        <input class="form-control" placeholder="Group title" [(ngModel)]="group.name">
+                    </h1>
+                </div>
+                <div class="col-auto">
+                    <h3 class="" >
+                        <i class="bi bi-caret-down-fill pe-3"></i>
+                        <i class="bi bi-grip-vertical ps-3"></i>
+                    </h3>
+                </div>
+
+            </div>
+            <div class="menu-grid">
+
+                <div class="menu-item position-relative p-1 fs-6" *ngFor="let item of group.products">
+<!--                    <div class="position-absolute end-0">-->
+<!--                        <div>-->
+<!--                            <button class="btn btn-link">-->
+<!--                                <h3 class="bi bi-pencil-fill"></h3>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <button class="btn btn-link">-->
+<!--                                <h3 class="bi bi-file-image"></h3>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="row gx-0">
+                        <div class="col-9">
+                            <img class="menu-item-img" [src]="item.photoLinks">
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                <button class="btn btn-link">
+                                    <h4 class="bi bi-pencil-fill"></h4>
+                                </button>
+                            </div>
+                            <div>
+                                <button class="btn btn-link">
+                                    <h4 class="bi bi-file-image"></h4>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+<!--                    <img class="menu-item-img" [src]="item.photoLinks">-->
+                    <div class="menu-item-title mt-2">
+                        <input class="form-control" placeholder="Product title" [(ngModel)]="item.name">
+                    </div>
+                    <div class="row mt-2 gx-0">
+                        <div class="col-9">
+                            <input type=number class="form-control" [(ngModel)]="item.price" [min]="0">
+                        </div>
+                        <div class="col-3 pt-1">
+                            <h4>₽</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>

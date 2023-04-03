@@ -10,8 +10,8 @@ export class AuthService {
   constructor(private readonly httpService: HttpService) {
   }
 
-  getUserToken(telegramUserId) {
-    console.log('$GET_USER_TOKEN', `${config.routes.server}/api/v1/admin/1/token?tgId=${telegramUserId}`);
+  getUserToken(telegramUserId, mlcId) {
+    console.log('$GET_USER_TOKEN', `${config.routes.server}/api/v1/admin/${mlcId}/token?tgId=${telegramUserId}`);
     const axiosRequestConfig: AxiosRequestConfig = {
       url: `${config.routes.server}/api/v1/admin/1/token?tgId=${telegramUserId}`,
       method: 'GET',

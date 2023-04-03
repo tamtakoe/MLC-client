@@ -25,21 +25,26 @@ async function bootstrap() {
     /**
      * Ask credentials for local development
      */
-    const appContext = await NestFactory.createApplicationContext(AppModule);
-    const authService = await appContext.get(AuthService);
-    const auth = await authService.getUserToken(761307220);
-    await appContext.close();
+    try {
+      const appContext = await NestFactory.createApplicationContext(AppModule);
+      const authService = await appContext.get(AuthService);
+      const auth = await authService.getUserToken(761307220, 1);
+      await appContext.close();
 
-    /**
-     * Add auth cookie to each request for local environment
-     */
-    app.use((req: Request, res: Response, next: any) => {
-      if (auth?.token) {
-        (req.headers as any)['cookie'] = `authToken=${auth.token};`;
-        req.cookies['authToken'] = auth.token
-      }
-      next();
-    });
+      /**
+       * Add auth cookie to each request for local environment
+       */
+      app.use((req: Request, res: Response, next: any) => {
+        if (auth?.token) {
+          (req.headers as any)['cookie'] = `authToken=${auth.token};`;
+          req.cookies['authToken'] = auth.token
+        }
+        next();
+      });
+
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   await app.listen(config.port, config.hostName, () => {
