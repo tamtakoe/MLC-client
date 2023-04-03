@@ -25,7 +25,7 @@ export class AppComponent {
     this.route.queryParams.subscribe((params) => {
 
       if (params['mlcId']) {
-        const user = Object.assign({mlcId: params['mlcId']}, initDataUnsafe.user)
+        const user = Object.assign({mlcId: params['mlcId'] || 1}, initDataUnsafe.user)
 
         this.usersResource.authorize(user).catch((error: any) => {
           this.flashMessage.error('Auth Error', { description: JSON.stringify(error) })

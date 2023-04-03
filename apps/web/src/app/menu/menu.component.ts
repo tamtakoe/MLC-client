@@ -90,12 +90,12 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const queryParams = this.route.snapshot.queryParams;
+    const mlcId = this.route.snapshot.queryParams['mlcId'] || 1;
     // const mlcIdFromRoute = Number(routeParams.get('mlcId'));
     // console.log(333, mlcIdFromRoute, this.route.snapshot.queryParams['mlcId'], this.route.snapshot.queryParamMap.getAll('mlcId'));
 
     this.updateTotal()
-    this.menuResource.getMenu({mlcId: queryParams['mlcId']}).then((data: any) => {
+    this.menuResource.getMenu({mlcId}).then((data: any) => {
       this.mlc = data.mlc
       this.cartService.setMlc(this.mlc)
       this.menu = data.menus[0].groups;
