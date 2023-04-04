@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {UsersResource} from "./_resources/users.resource";
 import {FlashMessage} from "./_services/flash-message";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, NavigationStart, Router} from "@angular/router";
 
 declare global {
   interface Window {
@@ -17,12 +17,21 @@ declare global {
 export class AppComponent {
   constructor(private usersResource: UsersResource,
               private flashMessage: FlashMessage,
+              private router: Router,
               private route: ActivatedRoute,) {
     console.log('Telegram:', window.Telegram);
     console.log('initData:', window.Telegram.WebApp.initData, 'platform:', window.Telegram.WebApp.platform) //platform == 'unknown'
     const initDataUnsafe = window?.Telegram?.WebApp?.initDataUnsafe
 
+    let url = ''
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        url = event.url
+      }
+    })
+
     this.route.queryParams.subscribe((params) => {
+      this.flashMessage.info(`${url}`, { description: JSON.stringify(params) })
 
       if (params['mlcId']) {
         const user = Object.assign({mlcId: params['mlcId'] || 1}, initDataUnsafe.user)
