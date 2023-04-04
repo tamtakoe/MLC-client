@@ -13,7 +13,7 @@ export class BackendService {
   request(axiosRequestConfig: AxiosRequestConfig, authorizationReq?: Request) {
     if (authorizationReq) {
       axiosRequestConfig.headers = axiosRequestConfig.headers || {}
-      axiosRequestConfig.headers['Token'] = authorizationReq.cookies.authToken//.headers.['cookie']
+      axiosRequestConfig.headers['Authorization'] = authorizationReq.cookies.authToken//.headers.['cookie']
     }
 
     console.log('$REQUEST', axiosRequestConfig);
