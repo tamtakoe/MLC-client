@@ -32,8 +32,7 @@ export class OrderComponent implements OnInit {
     this.orderResource.getCurrentOrder()
       .then((order: any) => {
         this.order = order;
-        this.applicationRef.tick()
-        this.flashMessage.info('Order', { description: JSON.stringify(order)})
+        this.applicationRef.tick() // Need for telegram app
       })
       .catch((error: any) => {
         this.flashMessage.error('Error', { description: JSON.stringify(error)})

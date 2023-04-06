@@ -3,6 +3,8 @@ import {MenuResource} from "../_resources/menu.resource";
 import {CartService} from "../cart/cart.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MainButton} from "../_services/main-button";
+import {OrderResource} from "../_resources/order.resource";
+import {FlashMessage} from "../_services/flash-message";
 
 @Component({
   selector: 'app-menu',
@@ -76,6 +78,8 @@ export class MenuComponent implements OnInit {
               private menuResource: MenuResource,
               private cartService: CartService,
               private mainButton: MainButton,
+              private orderResource: OrderResource,
+              private flashMessage: FlashMessage,
               private route: ActivatedRoute,
               private router: Router) {
 
@@ -101,6 +105,14 @@ export class MenuComponent implements OnInit {
       this.menu = data.menus[0].groups;
       this.groupId = this.menu[0].id;
     })
+
+    this.orderResource.getCurrentOrder()
+        .then((order: any) => {
+          this.flashMessage.info('Current order', { description: JSON.stringify(order)})
+        })
+        .catch((error: any) => {
+          this.flashMessage.error('Error', { description: JSON.stringify(error)})
+        })
   }
 
   scrollToTopMenu(groupId: number) {
