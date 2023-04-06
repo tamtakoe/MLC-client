@@ -2,7 +2,7 @@
     <div class="container bg-white">
         <div class="pt-4 mb-4">
             <h1 class="ms-2 text-uppercase fw-bold">Order №{{order.id}}</h1>
-            {{order}}
+            {{order | json}}
         </div>
         <div class="pt-4 mb-4">
             <h3 class="ms-2 text-uppercase fw-bold">Status: {{order.orderStatus}}</h3>
