@@ -16,8 +16,8 @@ export const authResolver: ResolveFn<any> = (route: ActivatedRouteSnapshot) => {
         initDataUnsafe = {
             "query_id": "AAEhIcYFAAAAACEhxgUPvCsM",
             "user": {
-                // "id": 96870689,
-                "id": 761307220,
+                "id": 96870689,
+                // "id": 761307220,
                 "first_name": "tamtakoe",
                 "last_name": "",
                 "username": "tamtakoe",

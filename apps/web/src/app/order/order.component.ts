@@ -14,7 +14,7 @@ export class OrderComponent implements OnInit {
 
   webApp = ''
   info = ''
-  order: any
+  order: any = {}
 
   constructor(private router: Router,
               private route: ActivatedRoute,
