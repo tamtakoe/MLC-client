@@ -3,6 +3,7 @@ import {BackButton} from "../_services/back-button";
 import {Router} from "@angular/router";
 import {MainButton} from "../_services/main-button";
 import {OrderResource} from "../_resources/order.resource";
+import {FlashMessage} from "../_services/flash-message";
 
 @Component({
   selector: 'app-order',
@@ -18,9 +19,10 @@ export class OrderComponent implements OnInit {
   constructor(private router: Router,
               private orderResource: OrderResource,
               private mainButton: MainButton,
-              private backButton: BackButton) {
+              private backButton: BackButton,
+              private flashMessage: FlashMessage) {
     // this.backButton.onClick(() => {
-    //   this.router.navigate(['menu'] );
+    //   this.router.navigate(['menu'], { queryParams: { mlcId: 1 } } );
     // })
     this.backButton.hide()
     this.mainButton.hide();
@@ -28,6 +30,9 @@ export class OrderComponent implements OnInit {
     this.orderResource.getCurrentOrder()
       .then((order: any) => {
         this.order = order;
+      })
+      .catch((error: any) => {
+        this.flashMessage.error('Error', { description: JSON.stringify(error)})
       })
   }
 
