@@ -31,6 +31,7 @@ export class OrderComponent implements OnInit {
     this.orderResource.getCurrentOrder()
       .then((order: any) => {
         this.order = order;
+        this.flashMessage.info('Order', { description: JSON.stringify(order)})
       })
       .catch((error: any) => {
         this.flashMessage.error('Error', { description: JSON.stringify(error)})
