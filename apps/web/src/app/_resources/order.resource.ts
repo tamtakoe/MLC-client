@@ -14,6 +14,10 @@ import {
   transformResponse: orderArr => new Map(JSON.parse(orderArr).map((obj: any) => [obj.id, obj]))
 })
 export class OrderResource extends ApiResource {
+  getCurrentOrder = Get({
+    url: '/orders/current'
+  })
+
   createOrder = Post();
 
   submitOrder = Put({

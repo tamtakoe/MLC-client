@@ -8,9 +8,21 @@ import {BackendService} from "../_services/backend.service";
 export class OrderController {
   constructor(private readonly backendService: BackendService) {}
 
+  @Get('orders/current')
+  getCurrentOrder(@Req() req: Request) {
+    console.log('> getCurrentOrder');
+    const axiosRequestConfig: AxiosRequestConfig = {
+      url: `${config.routes.server}/api/v1/order`,
+      method: 'GET',
+      responseType: 'json'
+    }
+
+    return this.backendService.request(axiosRequestConfig, req)
+  }
+
   @Post('orders')
   createOrder(@Body() body: any, @Req() req: Request) {
-    console.log('Create order');
+    console.log('> Create order');
     const axiosRequestConfig: AxiosRequestConfig = {
       url: `${config.routes.server}/api/v1/order/new`,
       method: 'POST',
@@ -23,7 +35,7 @@ export class OrderController {
 
   @Put('orders/:id/submit')
   submitOrder(@Param('id') id: string, @Req() req: Request) {
-    console.log(`Submit order ${id}`);
+    console.log(`> Submit order ${id}`);
     const axiosRequestConfig: AxiosRequestConfig = {
       url: `${config.routes.server}/api/v1/order/${id}/submit`,
       method: 'PUT',
@@ -47,6 +59,7 @@ export class OrderController {
 
   @Put('orders/complete')
   completeOrder(@Body() body, @Req() req: Request) {
+    console.log('> completeOrder');
     const axiosRequestConfig: AxiosRequestConfig = {
       url: `${config.routes.server}/api/v1/order/complete/AT_PLACE/AT_PLACE`,
       method: 'PUT',
@@ -58,6 +71,7 @@ export class OrderController {
 
   @Post('orders/product')
   addProduct(@Body() body, @Req() req: Request) {
+    console.log('> addProduct');
     const axiosRequestConfig: AxiosRequestConfig = {
       url: `${config.routes.server}/api/v1/order/add`,
       method: 'PUT',
@@ -70,6 +84,7 @@ export class OrderController {
 
   @Delete('orders/product')
   deleteProduct(@Body() body, @Req() req: Request) {
+    console.log('> deleteProduct');
     const axiosRequestConfig: AxiosRequestConfig = {
       url: `${config.routes.server}/api/v1/order/delete`,
       method: 'PUT',

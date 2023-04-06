@@ -1,8 +1,25 @@
 <div class="order mb-5">
     <div class="container bg-white">
         <div class="pt-4 mb-4">
-            <h1 class="ms-2 text-uppercase fw-bold">Order success</h1>
+            <h1 class="ms-2 text-uppercase fw-bold">Order №{{order.id}}</h1>
         </div>
+        <div class="pt-4 mb-4">
+            <h3 class="ms-2 text-uppercase fw-bold">Status: {{order.orderStatus}}</h3>
+        </div>
+        <table class="table">
+            <tbody>
+            <tr *ngFor="let item of order?.products">
+                <td class="cart-item-img-wrapper">
+                    <img class="cart-item-img" [src]="item.photoLinks">
+                </td>
+                <td>
+                    <div class="fw-bold">{{item.name}}</div>
+                    <div>{{item.price}} ₽ × {{item.count}}</div>
+                </td>
+                <td class="text-end">{{item.price * item.count}} ₽</td>
+            </tr>
+            </tbody>
+        </table>
         <a class="btn btn-link" routerLink="/admin-menu">Go to admin menu</a>
         <div>
             {{webApp}}
