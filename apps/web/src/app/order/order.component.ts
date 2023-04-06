@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ApplicationRef, Component, OnInit} from '@angular/core';
 import {BackButton} from "../_services/back-button";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MainButton} from "../_services/main-button";
@@ -21,6 +21,7 @@ export class OrderComponent implements OnInit {
               private orderResource: OrderResource,
               private mainButton: MainButton,
               private backButton: BackButton,
+              private applicationRef: ApplicationRef,
               private flashMessage: FlashMessage) {
     // this.backButton.onClick(() => {
     //   this.router.navigate(['menu'], { queryParams: { mlcId: 1 } } );
@@ -31,6 +32,7 @@ export class OrderComponent implements OnInit {
     this.orderResource.getCurrentOrder()
       .then((order: any) => {
         this.order = order;
+        this.applicationRef.tick()
         this.flashMessage.info('Order', { description: JSON.stringify(order)})
       })
       .catch((error: any) => {
@@ -52,11 +54,11 @@ export class OrderComponent implements OnInit {
     this.webApp = JSON.stringify(window.Telegram.WebApp, null, 2)
     this.info = document.referrer
 
-    this.route.data
-        .subscribe(data => {
-          const auth: any = data['auth'];
-          console.log('AUTH', auth);
-        });
+    // this.route.data
+    //     .subscribe(data => {
+    //       const auth: any = data['auth'];
+    //       console.log('AUTH', auth);
+    //     });
   }
 
 }
