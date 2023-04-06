@@ -1,5 +1,5 @@
 // Modules
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
@@ -24,11 +24,19 @@ import { BackButton } from "./_services/back-button";
 import { MenuResource } from "./_resources/menu.resource";
 import { OrderResource } from "./_resources/order.resource";
 import { UsersResource } from "./_resources/users.resource";
+import {AuthService} from "./_services/auth.service";
+
+function authorize(authService: AuthService) {
+  return () => authService.authorize();
+}
 
 @NgModule({
   declarations: [AppComponent, ErrorPageComponent, PreloaderComponent, MenuComponent, CartComponent, OrderComponent, AdminMenuComponent],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule, DndModule],
-  providers: [FlashMessage, MainButton, BackButton, MenuResource, OrderResource, UsersResource],
+  providers: [
+    { provide: APP_INITIALIZER, useFactory: authorize, deps: [AuthService], multi: true },
+    AuthService, FlashMessage, MainButton, BackButton, MenuResource, OrderResource, UsersResource
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BackButton} from "../_services/back-button";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MainButton} from "../_services/main-button";
 import {OrderResource} from "../_resources/order.resource";
 import {FlashMessage} from "../_services/flash-message";
@@ -17,6 +17,7 @@ export class OrderComponent implements OnInit {
   order: any
 
   constructor(private router: Router,
+              private route: ActivatedRoute,
               private orderResource: OrderResource,
               private mainButton: MainButton,
               private backButton: BackButton,
@@ -49,6 +50,12 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.webApp = JSON.stringify(window.Telegram.WebApp, null, 2)
     this.info = document.referrer
+
+    this.route.data
+        .subscribe(data => {
+          const auth: any = data['auth'];
+          console.log('AUTH', auth);
+        });
   }
 
 }

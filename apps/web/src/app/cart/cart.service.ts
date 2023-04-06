@@ -44,7 +44,7 @@ export class CartService {
               .then(data => {
                 return this.orderResource.completeOrder().then(() => {
                   this.orderResource.removeFromLocalStorage()
-                  this.router.navigate(['order'] );
+                  this.router.navigate(['order'], {queryParams: {mlcId: this.mlc.id}} );
                 })
               })
         })
