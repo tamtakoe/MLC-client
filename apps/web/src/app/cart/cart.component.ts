@@ -18,7 +18,7 @@ export class CartComponent implements OnInit {
 
     this.mainButton
         .onClick(() => {
-          this.cartService.createOrder()
+          this.cartService.sendOrder()
         })
         .setType('success')
         .setText(`Pay ${this.cartService.getTotalPrice()} ₽`)

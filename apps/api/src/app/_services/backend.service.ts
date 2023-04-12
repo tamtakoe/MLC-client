@@ -1,4 +1,4 @@
-import {Body, Injectable, Post} from '@nestjs/common';
+import { Body, HttpException, Injectable, Post } from "@nestjs/common";
 import {HttpService} from "@nestjs/axios";
 import { firstValueFrom } from 'rxjs';
 import {AxiosRequestConfig} from "axios/index";
@@ -20,8 +20,13 @@ export class BackendService {
 
     return firstValueFrom(this.httpService.request(axiosRequestConfig))
         .then(data => {
-          console.log('$RESPONSE', data.data);
+          console.log('$RESPONSE SUCCESS', data.data);
           return data.data
         })
+        .catch(error => {
+            console.log(`$RESPONSE ERROR ${error?.message}`, error);
+          throw new HttpException(error.response.data.message, error.response.status);
+        })
+
   }
 }

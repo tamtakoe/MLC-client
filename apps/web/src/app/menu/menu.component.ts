@@ -111,7 +111,11 @@ export class MenuComponent implements OnInit {
           this.flashMessage.info('Current order', { description: JSON.stringify(order)})
         })
         .catch((error: any) => {
-          this.flashMessage.error('Error', { description: JSON.stringify(error)})
+          if (error.status === 404) {
+            this.cartService.createOrder()
+          } else {
+            this.flashMessage.error('Error', { description: JSON.stringify(error)})
+          }
         })
   }
 

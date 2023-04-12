@@ -32,25 +32,28 @@ export class CartService {
   createOrder() {
     return this.orderResource.createOrder({})
         .then((order: any) => {
-          const promises = [];
           this.order = order;
-
-          for (const [productId, product] of this.cart) {
-            const promise = this.addProduct(product)
-            promises.push(promise);
-          }
-
-          return Promise.all(promises)
-              .then(data => {
-                return this.orderResource.completeOrder().then(() => {
-                  this.orderResource.removeFromLocalStorage()
-                  this.router.navigate(['order'], {queryParams: {mlcId: this.mlc.id}} );
-                })
-              })
         })
         .catch((error: any) => {
           this.flashMessage.error('Error while order creation', { description: JSON.stringify(error) })
         })
+  }
+
+  sendOrder() {
+      const promises = [];
+
+      for (const [productId, product] of this.cart) {
+          const promise = this.addProduct(product)
+          promises.push(promise);
+      }
+
+      return Promise.all(promises)
+          .then(data => {
+              return this.orderResource.completeOrder().then(() => {
+                  this.orderResource.removeFromLocalStorage()
+                  this.router.navigate(['order'], {queryParams: {mlcId: this.mlc.id}} );
+              })
+          })
   }
 
   addProduct(product: any) {
