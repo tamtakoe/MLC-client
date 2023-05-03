@@ -35,7 +35,7 @@ export class AssetsMiddleware implements NestMiddleware {
                     res.end(response.data, 'binary');
                 },
                 error: (error: any) => {
-                    res.status(error.response.status).send(error.response.statusText);
+                    res.status(error?.response?.status).send(error?.response?.statusText);
                 },
             });
         } else {

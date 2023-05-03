@@ -25,7 +25,7 @@ export class BackendService {
         })
         .catch(error => {
             console.log(`$RESPONSE ERROR ${error?.message}`, error);
-          throw new HttpException(error.response.data.message, error.response.status);
+          throw new HttpException(error?.response?.data?.message, error?.response?.status);
         })
 
   }

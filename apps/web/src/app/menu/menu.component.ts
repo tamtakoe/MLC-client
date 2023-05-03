@@ -108,10 +108,11 @@ export class MenuComponent implements OnInit {
 
     this.orderResource.getCurrentOrder()
         .then((order: any) => {
-          this.flashMessage.info('Current order', { description: JSON.stringify(order)})
+          this.router.navigate(['order'], {queryParams: {mlcId: this.mlc.id}} );
+          // this.flashMessage.info('Current order', { description: JSON.stringify(order)})
         })
         .catch((error: any) => {
-          if (error.status === 404) {
+          if (error?.status === 404) {
             this.cartService.createOrder()
           } else {
             this.flashMessage.error('Error', { description: JSON.stringify(error)})
